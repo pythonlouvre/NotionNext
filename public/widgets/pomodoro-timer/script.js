@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const startButton = document.getElementById('start-button');
   const pauseButton = document.getElementById('pause-button');
   const resetButton = document.getElementById('reset-button');
+  const alarmSound = document.getElementById('alarm-sound');
 
   function updateTimerDisplay() {
     minutesElement.textContent = `${minutes}`.padStart(2, '0');
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(intervalId);
+          playAlarm();
           alert('时间到！');
           return;
         }
@@ -30,6 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       updateTimerDisplay();
     }, 1000);
+  }
+
+  function playAlarm() {
+    alarmSound.play().catch(error => {
+      console.error('Failed to play alarm:', error);
+    });
   }
 
   function pauseTimer() {
