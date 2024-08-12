@@ -13,7 +13,7 @@ const alarmSound = document.getElementById('alarm-sound');
 
 function updateTimerDisplay() {
   minutesElement.textContent = `${Math.floor(elapsedSeconds / 60 / 1000/ 1000)}`.padStart(2, '0');
-  secondsElement.textContent = `${elapsedSeconds % 60 /1000/ 1000}`.padStart(2, '0');
+  secondsElement.textContent = `${elapsedSeconds /1000/ 1000 % 60 }`.padStart(2, '0');
 }
 
 function startTimer() {
