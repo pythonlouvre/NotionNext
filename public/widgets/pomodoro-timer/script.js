@@ -1,6 +1,6 @@
 // script.js
 let startTime;
-let elapsedSeconds = 25 * 60; // 初始化为 25 分钟
+let elapsedSeconds = 25 * 60 *1000; // 初始化为 25 分钟
 let intervalId;
 
 const timerDisplay = document.getElementById('timer-display');
@@ -12,8 +12,8 @@ const resetButton = document.getElementById('reset-button');
 const alarmSound = document.getElementById('alarm-sound');
 
 function updateTimerDisplay() {
-  minutesElement.textContent = `${Math.floor(elapsedSeconds / 60)}`.padStart(2, '0');
-  secondsElement.textContent = `${elapsedSeconds % 60}`.padStart(2, '0');
+  minutesElement.textContent = `${Math.floor(elapsedSeconds / 60 / 1000)}`.padStart(2, '0');
+  secondsElement.textContent = `${elapsedSeconds % 60 /1000}`.padStart(2, '0');
 }
 
 function startTimer() {
@@ -21,8 +21,10 @@ function startTimer() {
 
   function tick() {
     const now = performance.now();
-    const elapsed = Math.round((now - startTime) / 1000);
+    const elapsed = now - startTime;
+    //console.log(elapsed);
     const remaining = elapsedSeconds - elapsed;
+    console.log(remaining);
 
     if (remaining > 0) {
       elapsedSeconds = remaining;
