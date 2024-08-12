@@ -12,8 +12,10 @@ const resetButton = document.getElementById('reset-button');
 const alarmSound = document.getElementById('alarm-sound');
 
 function updateTimerDisplay() {
-  minutesElement.textContent = `${Math.floor(elapsedSeconds / 60 / 1000/ 1000)}`.padStart(2, '0');
-  secondsElement.textContent = `${elapsedSeconds /1000/ 1000 % 60 }`.padStart(2, '0');
+  // 将 elapsedSeconds 转换为秒数
+  const elapsedSecondsInSec = elapsedSeconds / 1000 / 1000;
+  minutesElement.textContent = `${Math.floor(elapsedSecondsInSec / 60)}`.padStart(2, '0');
+  secondsElement.textContent = `${Math.floor(elapsedSecondsInSec % 60)}`.padStart(2, '0');
 }
 
 function startTimer() {
