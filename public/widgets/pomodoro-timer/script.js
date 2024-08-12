@@ -1,6 +1,6 @@
 // script.js
 let startTime;
-let elapsedSeconds = 0;
+let elapsedSeconds = 25 * 60; // 初始化为 25 分钟
 let intervalId;
 
 const timerDisplay = document.getElementById('timer-display');
@@ -16,8 +16,7 @@ function updateTimerDisplay() {
   secondsElement.textContent = `${elapsedSeconds % 60}`.padStart(2, '0');
 }
 
-function startTimer(minutes, seconds) {
-  elapsedSeconds = minutes * 60 + seconds;
+function startTimer() {
   startTime = performance.now();
 
   function tick() {
@@ -26,6 +25,7 @@ function startTimer(minutes, seconds) {
     const remaining = elapsedSeconds - elapsed;
 
     if (remaining > 0) {
+      elapsedSeconds = remaining;
       updateTimerDisplay();
 
       intervalId = setTimeout(tick, 1000);
@@ -51,14 +51,14 @@ function stopTimer() {
 
 function resetTimer() {
   stopTimer();
-  elapsedSeconds = 25 * 60;
+  elapsedSeconds = 25 * 60; // 重置为 25 分钟
   updateTimerDisplay();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  startButton.addEventListener('click', () => startTimer(25, 0));
+  startButton.addEventListener('click', startTimer);
   pauseButton.addEventListener('click', stopTimer);
   resetButton.addEventListener('click', resetTimer);
 
-  updateTimerDisplay();
+  updateTimerDisplay(); // 确保在页面加载时显示正确的初始时间
 });
